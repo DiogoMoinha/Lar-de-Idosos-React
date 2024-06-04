@@ -22,7 +22,7 @@ export default function Login() {
                 aux.userId = res.rows[0].userId;
 
                 ctx.setContext(aux);
-                navigate("/todo");
+                navigate("/home");
             }else{
                 alert(res.message ?? "Algo correu mal");
             }

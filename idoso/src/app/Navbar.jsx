@@ -22,9 +22,9 @@ export default function NavbarCust() {
 
                     {ctx.context.userId != 0 ? <Nav.Link onClick={()=>navigate("/ListaTrabalhadores")} > Trabalhadores </Nav.Link> : ''}
 
-                    <Nav.Link onClick={()=>navigate("/login")}>Login</Nav.Link>
+                    <Nav.Link onClick={()=>navigate("/login")}> Login </Nav.Link>
                     
-                    <Nav.Link onClick={()=>navigate("/registar")}>Registar</Nav.Link>
+                    <Nav.Link onClick={()=>navigate("/registar")}> Registar </Nav.Link>
                 </Nav>
 
                 {ctx.context.userId != 0 ? <Navbar.Text>

@@ -4,10 +4,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreateUser from './app/Register';
 import Login from './app/Login';
 import Home from './app/Home';
-import Idosos from './app/ListaIdoso';
-import Trabalhadores from './app/ListaTrabalhadores';
+import ListaIdoso from './app/ListaIdoso';
+import ListaTrabalhadores from './app/ListaTrabalhadores';
 import NavbarCust from './app/Navbar';
 import FilterHoc from './app/service/FilterHoc';
+
 
 
 
@@ -26,24 +27,25 @@ function App() {
   return (
     <BrowserRouter>
       <AppContext.Provider value={{ context: ctx, setContext: setCtx }} >
-        <FilterHoc>
-          <NavbarCust />
-          <div className={(ctx.themeIsLight ? "bg-light text-dark" : "bg-dark text-white") + ' container'}>
-            <div className='row'>
+        <div className={(ctx.themeIsLight ? "bg-light text-dark" : "bg-dark text-white") + ' container'}>
+          <div className='row'>
+            <NavbarCust />
+            <FilterHoc>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/Idoso" element={<Idosos />} />
-                <Route path='/Trabalhadores' element={<Trabalhadores />} />
+                <Route path="/Idoso" element={<ListaIdoso />} />
+                <Route path='/Trabalhadores' element={<ListaTrabalhadores />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<CreateUser />} />
+                <Route path="/registar" element={<CreateUser />} />
               </Routes>
-            </div>
+            </FilterHoc>
+
           </div>
-        </FilterHoc>
+        </div>
+
       </AppContext.Provider>
     </BrowserRouter>
-
 
   );
 }
