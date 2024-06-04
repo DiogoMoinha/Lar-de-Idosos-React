@@ -1,19 +1,19 @@
 import { useContext, useEffect, useState } from "react";
-import { getIdososAPIPaged } from "./service/api.jsx";
+import { getTrabalhadoresAPIPaged } from "./service/api.jsx";
 import { AppContext } from "../App.jsx";
 
 
-    var idosoObject = {
+    var trabalhadorObject = {
     id: 0,
     Nome: '',
     Idade: '',
     Foto: ''
 }
 
-function ListaIdoso(){
+function ListaTrabalhadores(){
     const ctx = useContext(AppContext);
 
-    const [ListaIdosos, setLista] = useState([{...idosoObject}])
+    const [ListaTrabalhadores, setLista] = useState([{...trabalhadorObject}])
 
     // id para paginação
     const [idPagina, setIdPagina] = useState(0);
@@ -21,14 +21,12 @@ function ListaIdoso(){
 
     // variavel que controla o modal do delete
     const [showDelete, setShowDelete] = useState(false);
-    const [idIdosoToDelete, setIdIdosoToDelete] = useState(0);
-
-
+    const [idTrabalhadoresToDelete, setIdTrabalhadoresToDelete] = useState(0);
 
 
     // atualiza a lista de Idosos da API
-    const handleGetListaIdosos = () => {
-        getIdososAPIPaged(idPagina)
+    const handleGetListaTrabalhadores = () => {
+        getTrabalhadoresAPIPaged(idPagina)
             .then((res) => {
                 return res.json();
             })
@@ -42,49 +40,49 @@ function ListaIdoso(){
     }
 
     useEffect(()=>{
-        handleGetListaIdosos();
+        handleGetListaTrabalhadores();
     }, [idPagina]);
 
 
     // funcao a ser chamada pelo Modal de delete
     const handleCloseModalDelete = (isToSave) => {
         if (isToSave) {
-            deleteIdosoAPI(idIdosoToDelete, ctx.context.jwtToken)
+            deleteTrabalhadorAPI(idTrabalhadorToDelete, ctx.context.jwtToken)
                 .then((res) => {
                     if(res.status==403)
                         throw 'Por favor faça autenticação primeiro.'    
                     return res.json();
                 })
                 .then((res) => {
-                    handleGetListaIdosos();
+                    handleGetListaTrabalhadores();
                 })
                 .catch(res => {
                     alert(res);
                 });
         }
 
-        setIdIdosoToDelete(0);
+        setIdTrabalhadoresToDelete(0);
         setShowDelete(false);
     }
 
 
     // funcao que inicializa o modal de delete
-    const handleModalDeleteIdoso = (id) => {
-        setIdIdosoToDelete(id);
+    const handleModalDeleteTrabalhador = (id) => {
+        setIdTrabalhadoresToDelete(id);
         setShowDelete(true);
     }
 
 
     const handleCloseModalEdit = (isToSave) => {
         if (isToSave) {
-            editIdosoAPI(IdosoToEdit, ctx.context.jwtToken)
+            editTrabalhadorAPI(TrabalhadorToEdit, ctx.context.jwtToken)
                 .then((res) => {
                     if(res.status==403)
                         throw 'Por favor faça autenticação primeiro.'
                     return res.json();
                 })
                 .then((res) => {
-                    handleGetListaIdosos();
+                    handleGetListaTrabalhadores();
                 })
                 .catch(err => {
                     alert(err)
@@ -95,27 +93,25 @@ function ListaIdoso(){
     }
 
     
-
-    
     return <>
 
-    <CreateIdoso />
+    <CreateTrabalhador />
     
     <ul className="mt-5" style={{ overflowY: "scroll", height: "60vh" }}>
             {
-                ListaIdosos.length != 0 && ListaIdosos[0].id != 0 ?
-                    ListaIdosos.map((Idoso) => {
-                        return <TodoItemLista IdosoProp={Idoso}
-                        handleModalDeleteIdosoProp={handleModalDeleteIdoso}
-                        handleModalEditIdosoProp={handleModalEditIdoso} />
+                ListaTrabalhadores.length != 0 && ListaTrabalhadores[0].id != 0 ?
+                    ListaTrabalhadores.map((Trabalhador) => {
+                        return <TodoItemLista TrabalhadorProp={Trabalhador}
+                        handleModalDeleteTrabalhadorProp={handleModalDeleteTrabalhador}
+                        handleModalEditTrabalhadorProp={handleModalEditTrabalhador} />
                     }) :
                     ''
             }
         </ul>
 
-        <TodoModals showDelete={showDelete} handleCloseModalDelete={handleCloseModalDelete} idIdosoToDelete={idIdosoToDelete}
-            handleCloseModalEdit={handleCloseModalEdit} setShowEdit={setShowEdit} setIdosoToEdit={setIdosoToEdit}
-            showEdit={showEdit} IdosoToEdit={IdosoToEdit}
+        <TodoModals showDelete={showDelete} handleCloseModalDelete={handleCloseModalDelete} idTrabalhadoresToDelete={idTrabalhadoresToDelete}
+            handleCloseModalEdit={handleCloseModalEdit} setShowEdit={setShowEdit} setTrabalhadorToEdit={setTrabalhadorToEdit}
+            showEdit={showEdit} TrabalhadorToEdit={TrabalhadorToEdit}
         />
 
         <nav aria-label="Page navigation example">
@@ -132,4 +128,4 @@ function ListaIdoso(){
 
 }
 
-export default ListaIdoso;
+export default ListaTrabalhadores;

@@ -6,3 +6,11 @@ export function loginAPI(email, pass) {
         method: "POST"
     })
 }
+
+export function getIdososAPIPaged() {
+    return fetch("https://laramanha.azurewebsites.net/api/values/ListaIdoso")
+} 
+
+export function getTrabalhadoresAPIPaged() {
+    return fetch("https://laramanha.azurewebsites.net/api/values/ListaTrabalhador")
+}

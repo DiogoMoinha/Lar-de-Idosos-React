@@ -40,3 +40,4 @@ function Idoso(){
 
 }
 
+export default Idoso;

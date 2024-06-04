@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import imgBackGround from '../image/Lar-de-Idoso-exterior.webp'
 
 export default function Home(){
 
     return <>
     <div className='image'>
-        <image src='./image/Lar-de-Idoso-exterior'></image>
+        <img style={{opacity:0.5}} src={imgBackGround}></img>
     </div>
     
     <div className='row'>

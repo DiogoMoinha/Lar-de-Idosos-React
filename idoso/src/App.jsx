@@ -1,18 +1,21 @@
 import './App.css';
 import { createContext, useEffect, useState } from 'react';
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Register from './app/Register';
+import CreateUser from './app/Register';
 import Login from './app/Login';
 import Home from './app/Home';
 import Idosos from './app/ListaIdoso';
-//import NavbarCust from '.app/Navbar';
+import Trabalhadores from './app/ListaTrabalhadores';
+import NavbarCust from './app/Navbar';
+import FilterHoc from './app/service/FilterHoc';
+
 
 
 var contextInterface = {
-  context: { themeIsLight: false, jwtToken: "", userId: 0 },
+  context: { themeIsLight: false, userId: 0 },
   setContext: () => { }
 }
+
 
 export const AppContext = createContext({ ...contextInterface });
 
@@ -30,10 +33,10 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
-                <Route path='/Idoso' element={<Idosos />} />
+                <Route path="/Idoso" element={<Idosos />} />
                 <Route path='/Trabalhadores' element={<Trabalhadores />} />
-                <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<CreateUser />} />
               </Routes>
             </div>
           </div>
