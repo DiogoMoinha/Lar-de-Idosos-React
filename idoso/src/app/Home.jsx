@@ -11,7 +11,7 @@ export default function Home(){
     <div className='row'>
         <h1>Informações sobre o Lar</h1>
         <div>
-            <p>O lar de Idosos do Amanhã, tem multiplas comodidades </p>
+            <p>O lar de Idosos do Amanhã, tem multiplas comodidades para satisfazer </p>
         </div>
     </div>
     

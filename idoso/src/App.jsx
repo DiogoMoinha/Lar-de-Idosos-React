@@ -6,8 +6,8 @@ import Register from './app/Register';
 import Login from './app/Login';
 import Home from './app/Home';
 import Idosos from './app/ListaIdoso';
-import NavbarCust from './app/Navbar';
-import FilterHoc from './service/FilterHoc';
+//import NavbarCust from '.app/Navbar';
+
 
 var contextInterface = {
   context: { themeIsLight: false, jwtToken: "", userId: 0 },

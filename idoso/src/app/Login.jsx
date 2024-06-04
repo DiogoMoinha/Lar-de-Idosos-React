@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../src/App.jsx";
 import { loginAPI } from "../service/api";
 
 export default function Login() {
