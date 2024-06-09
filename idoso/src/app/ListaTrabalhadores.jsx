@@ -2,17 +2,21 @@ import { useContext, useEffect, useState } from "react";
 import { getTrabalhadoresAPIPaged } from "./service/api.jsx";
 import { AppContext } from "../App.jsx";
 
-
-    var trabalhadorObject = {
+var trabalhadorObject = {
     id: 0,
     Nome: '',
     Idade: '',
-    Foto: ''
-}
+    Foto: '',
+    Email: '',
+    NumTelemovel: '',
+    Tipo: '',
+    Descricao: ''
+    }
+    
 
 function ListaTrabalhadores(){
     const ctx = useContext(AppContext);
-
+    
     const [ListaTrabalhadores, setLista] = useState([{...trabalhadorObject}])
 
     // id para paginação

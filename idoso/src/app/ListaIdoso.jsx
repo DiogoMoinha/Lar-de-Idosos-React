@@ -3,7 +3,8 @@ import { getIdososAPIPaged } from "./service/api.jsx";
 import { AppContext } from "../App.jsx";
 
 
-    var idosoObject = {
+// variavel que controla o modal de edit
+var idosoObject = {
     id: 0,
     Nome: '',
     Idade: '',
@@ -94,7 +95,16 @@ function ListaIdoso(){
         setShowEdit(false);
     }
 
-    
+    // funcao que inicializa o modal de edit
+    const handleModalEditIdoso = (idoso) => {
+        setIdosoToEdit({
+            ...idoso,
+            Nome: idoso.Nome,
+            Idade: idoso.Idade,
+            Foto: idoso.Foto
+        });
+        setShowEdit(true);
+    }
 
     
     return <>

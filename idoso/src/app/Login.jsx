@@ -10,6 +10,14 @@ export default function Login() {
         pass: ''
     })
 
+
+
+        const handleUserId = () => {
+          atualizarVariavel('1');
+        };
+
+    
+
     const ctx = useContext(AppContext);
 
     const login = () => {
