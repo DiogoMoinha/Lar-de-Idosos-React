@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { AppContext } from "../App";
-import { loginAPI } from "../service/api";
+import { AppContext } from "../App.jsx";
+import { loginAPI } from "./service/api.jsx";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function Login() {
                 aux.userId = res.rows[0].userId;
 
                 ctx.setContext(aux);
-                navigate("/todo");
+                navigate("/home");
             }else{
                 alert(res.message ?? "Algo correu mal");
             }
