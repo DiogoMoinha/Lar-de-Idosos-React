@@ -37,7 +37,7 @@ function App() {
             <FilterHoc>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home userId={userId} setUserId={setUserId} />} />
+                <Route path="/home" element={<Home userId={userId} atualizarUserId={atualizarUserId} />} />
                 <Route path="/Idoso" element={<ListaIdoso />} />
                 <Route path='/Trabalhadores' element={<ListaTrabalhadores />} />
                 <Route path="/login" element={<Login />} />

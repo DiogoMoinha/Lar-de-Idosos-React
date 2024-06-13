@@ -10,8 +10,6 @@ export default function Login() {
         pass: ''
     })
 
-
-
         const handleUserId = () => {
           atualizarVariavel('1');
         };
@@ -31,6 +29,7 @@ export default function Login() {
 
                 ctx.setContext(aux);
                 navigate("/home");
+                handleUserId();
             }else{
                 alert(res.message ?? "Algo correu mal");
             }
