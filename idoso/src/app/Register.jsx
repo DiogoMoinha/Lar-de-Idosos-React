@@ -1,33 +1,30 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
-
+import { useContext, useState } from 'react';
+import { AppContext } from "../App.jsx";
+import { registarAPI } from "./service/api";
 
 export default function CreateUser() {
     const navigate = useNavigate();
+    const [user, setUser] = useState({
+        nome: '',
+        email: '',
+        password: '',
+        numTel: ''
+    })
 
-    const [nome, setNome] =useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [numTel, setNumTel] = useState('');
 
-    function CriaUser(nome,email,password,numTel){
-        fetch('https://laramanha.azurewebsites.net/api/values/Registar', {
-        method: 'POST',
-        headers: {
-            'accept': '*/*',
-            'Content-Type': 'application/json'
-        },
-        
-        body: JSON.stringify({
-            'Nome': nome,
-            'Email': email,
-            'Password': password,
-            'NumTelemovel': numTel,
-            
-        })
-        }).then(res=>res.json())
+    const ctx = useContext(AppContext);
+
+    const registar = () => {
+        registarAPI(user.nome, user.email, user.password, user.numTel)
+        .then(res=>res.json())
         .then(res=> {
-            if(res.sucess) {
+            if(res.sucess && res.rows[0]!=null) {
+                let aux = {...ctx.context};
+                aux.jwtToken = res.rows[0].jwtToken;
+                aux.userId = res.rows[0].userId;
+
+                ctx.setContext(aux);
                 navigate("/login");
             }else{
             alert(res.message ?? "Algo correu mal");
@@ -36,34 +33,37 @@ export default function CreateUser() {
     }
 
     return <>
-        <div class="mb-4 mt-5 login-inputs ">
-            <label class="form-label" for="form2Example1">Nome: </label>
+        <div className="mb-4 mt-5 login-inputs ">
+            <label className="form-label" >Nome: </label>
             <div className="ms-3 col-md-4 col-xs-6">
-                <input value={nome} onChange={evt => setNome()} type="text" id="form2Example1" class="form-control" />
+                <input value={user.nome} onChange={evt => setUser({...user, nome:evt.target.value})} type="text"  className="form-control" />
             </div>
         </div>
         
-        <div class="mb-4 mt-5 login-inputs ">
-            <label class="form-label" for="form2Example1">Email: </label>
+        <div className="mb-4 mt-5 login-inputs ">
+            <label className="form-label" htmlFor="form2Example1">Email: </label>
             <div className="ms-3 col-md-4 col-xs-6">
-                <input value={email} onChange={evt => setEmail()} type="email" id="form2Example1" class="form-control" />
+                <input value={user.email} onChange={evt => setUser({...user, email:evt.target.value})} type="email" id="form2Example1" className="form-control" />
             </div>
         </div>
         
-        <div class="mb-4 mt-5 login-inputs ">
-            <label class="form-label" for="form2Example1">Pass: </label>
+        <div className="mb-4 mt-5 login-inputs ">
+            <label className="form-label" htmlFor="form2Example2">Pass: </label>
             <div className="ms-3 col-md-4 col-xs-6">
-                <input value={password} onChange={evt => setPassword()} type="password" id="form2Example1" class="form-control" />
+                <input value={user.password} onChange={evt => setUser({...user, password:evt.target.value})} type="password" id="form2Example2" className="form-control" />
             </div>
         </div>
         
-        <div class="mb-4 mt-5 login-inputs ">
-            <label class="form-label" for="form2Example1">Número de Telemovel: </label>
+        <div className="mb-4 mt-5 login-inputs ">
+            <label className="form-label" htmlFor="form2Example3">Número de Telemovel: </label>
             <div className="ms-3 col-md-4 col-xs-6">
-                <input value={numTel} onChange={evt => setNumTel()} type="number" id="form2Example1" class="form-control" />
+                <input value={user.numTel} onChange={evt => setUser({...user, numTel:evt.target.value})} type="number" id="form2Example3" className="form-control" />
             </div>
         </div>
 
-        <div className='col-xs-12 col-md-3'><input className='form-control' type='button' onClick={(evt) => { CriaUser(nome,email,password,numTel) }} value={"Registar"} /></div>
+        <button onClick={()=>{
+                registar();
+            }} type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-4">Registar</button>
+
     </>;
 }

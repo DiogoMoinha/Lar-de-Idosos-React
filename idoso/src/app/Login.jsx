@@ -56,7 +56,7 @@ export default function Login() {
         <div class="mb-4 mt-5 login-inputs ">
             <button onClick={()=>{
                 login();
-            }} type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Sign in</button>
+            }} type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Login</button>
         </div>
 
     </div>;
