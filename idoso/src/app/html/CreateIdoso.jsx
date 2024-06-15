@@ -23,7 +23,7 @@ export default function CreateIdoso() {
         form.append('Foto', Foto);
 
         debugger;
-        createIdosoAPI(tarefa, ctx.context.jwtToken)
+        createIdosoAPI(Idoso, ctx.context.jwtToken)
             .then(res => {
                 if(typeof res == 'object' && res.success){
                     setDesc('');

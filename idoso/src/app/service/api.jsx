@@ -30,3 +30,27 @@ export function registarAPI(nome, email, password, numTel){
         })
     })
 }
+
+export function createIdosoAPI(Idoso, token) {
+    return fetch("https://laramanha.azurewebsites.net/api/values/createIdoso", {
+        body: JSON.stringify(Idoso),
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+            Authorization: "Bearer "+token
+        },
+        method: "POST"
+    });
+}
+
+export function createTrabalhadorAPI(Trabalhador, token) {
+    return fetch("https://laramanha.azurewebsites.net/api/values/createTrabalhador", {
+        body: JSON.stringify(Trabalhador),
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+            Authorization: "Bearer "+token
+        },
+        method: "POST"
+    });
+}

@@ -1,29 +1,28 @@
 import { useContext, useState } from "react";
-import { createIdosoAPI } from "../../service/api";
+import { createTrabalhadorAPI } from "../service/api";
 import { AppContext } from "../../App";
 
 export default function CreateIdoso() {
     const [Name, setName] = useState('');
     const [Idade, setIdade] = useState('');
     const [Foto, setFoto] = useState('');
-    const [estado, setestado] = useState('');
 
     const ctx = useContext(AppContext);
 
-    // adiciona tarefa na api
-    const handleCreateIdoso = () => {
+    // adiciona o trabalhador na api
+    const handleCreateTrabalhador = () => {
         if (Name == '' || Idade == '') {
-            alert("Por favor insira o Nome e a Idade do Idoso.");
+            alert("Por favor insira o Nome e a Idade do Trabalhador.");
             return
         }
 
-        let Idoso = { Nome: Name, idade: Idade, estado: "Pendente" };
+        let Trabalhador = { Nome: Name, idade: Idade};
 
         let form = new FormData();
         form.append('Foto', Foto);
 
         debugger;
-        createIdosoAPI(tarefa, ctx.context.jwtToken)
+        createTrabalhadorAPI(Trabalhador, ctx.context.jwtToken)
             .then(res => {
                 if(typeof res == 'object' && res.success){
                     setDesc('');
@@ -64,7 +63,7 @@ export default function CreateIdoso() {
 
         <div className="row">
             <div className="col-md-3">
-                <button type="button" onClick={() => { handleCreateIdoso() }} className="btn btn-secondary">Criar Idoso</button>
+                <button type="button" onClick={() => { handleCreateTrabalhador() }} className="btn btn-secondary">Criar Idoso</button>
             </div>
         </div>
     </div>

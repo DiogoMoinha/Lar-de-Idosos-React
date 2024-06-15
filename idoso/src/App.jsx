@@ -13,7 +13,7 @@ import FilterHoc from './app/service/FilterHoc';
 
 
 var contextInterface = {
-  context: { themeIsLight: false, userId: 0 },
+  context: { themeIsLight: false, userId: 1 },
   setContext: () => { }
 }
 
@@ -38,7 +38,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home userId={userId} atualizarUserId={atualizarUserId} />} />
-                <Route path="/Idoso" element={<ListaIdoso />} />
+                <Route path="/Idosos" element={<ListaIdoso />} />
                 <Route path='/Trabalhadores' element={<ListaTrabalhadores />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/registar" element={<CreateUser />} />

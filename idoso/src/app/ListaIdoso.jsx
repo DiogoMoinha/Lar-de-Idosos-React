@@ -2,12 +2,16 @@ import { useContext, useEffect, useState } from "react";
 import { getIdososAPIPaged } from "./service/api.jsx";
 import { AppContext } from "../App.jsx";
 
+import CreateIdoso from "./html/CreateTrabalhador.jsx";
+import IdosoItemLista from "./html/ListaIdosoItem.jsx";
+import IdosoModals from "./html/IdosoModals.jsx";
 
 // variavel que controla o modal de edit
 var idosoObject = {
     id: 0,
     Nome: '',
     Idade: '',
+    Estado: 'Pendente',
     Foto: ''
 }
 
@@ -115,7 +119,7 @@ function ListaIdoso(){
             {
                 ListaIdosos.length != 0 && ListaIdosos[0].id != 0 ?
                     ListaIdosos.map((Idoso) => {
-                        return <TodoItemLista IdosoProp={Idoso}
+                        return <IdosoItemLista IdosoProp={Idoso}
                         handleModalDeleteIdosoProp={handleModalDeleteIdoso}
                         handleModalEditIdosoProp={handleModalEditIdoso} />
                     }) :
@@ -123,7 +127,7 @@ function ListaIdoso(){
             }
         </ul>
 
-        <TodoModals showDelete={showDelete} handleCloseModalDelete={handleCloseModalDelete} idIdosoToDelete={idIdosoToDelete}
+        <IdosoModals showDelete={showDelete} handleCloseModalDelete={handleCloseModalDelete} idIdosoToDelete={idIdosoToDelete}
             handleCloseModalEdit={handleCloseModalEdit} setShowEdit={setShowEdit} setIdosoToEdit={setIdosoToEdit}
             showEdit={showEdit} IdosoToEdit={IdosoToEdit}
         />

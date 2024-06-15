@@ -18,13 +18,15 @@ export default function NavbarCust() {
                 <Nav className="me-auto">
                     <Nav.Link onClick={()=>{navigate("/home")}} >Pagina Principal </Nav.Link>
 
-                    {ctx.context.userId != 0 ? <Nav.Link onClick={()=>navigate("/ListaIdoso")} > Idosos </Nav.Link> : ''}
+                    {ctx.context.userId != 0 ? <Nav.Link onClick={()=>navigate("/Idosos")} > Idosos </Nav.Link> : ''}
 
-                    {ctx.context.userId != 0 ? <Nav.Link onClick={()=>navigate("/ListaTrabalhadores")} > Trabalhadores </Nav.Link> : ''}
+                    {ctx.context.userId != 0 ? <Nav.Link onClick={()=>navigate("/Trabalhadores")} > Trabalhadores </Nav.Link> : ''}
 
-                    <Nav.Link onClick={()=>navigate("/login")}> Login </Nav.Link>
+                    {ctx.context.userId == 0 ?<Nav.Link onClick={()=>navigate("/login")}> Login </Nav.Link> : ''}
                     
-                    <Nav.Link onClick={()=>navigate("/registar")}> Registar </Nav.Link>
+                    {ctx.context.userId == 0 ?<Nav.Link onClick={()=>navigate("/registar")}> Registar </Nav.Link> : ''}
+
+                    {ctx.context.userId != 0 ?<Nav.Link onClick={() =>navigate("/home")}> Sair </Nav.Link>: ''}
                 </Nav>
 
                 {ctx.context.userId != 0 ? <Navbar.Text>

@@ -38,25 +38,25 @@ export default function Login() {
 
     return <div style={{height:'80vh'}}>
         <h4>Página de Login</h4>
-        <div class="mb-4 mt-5 login-inputs ">
-            <label class="form-label" for="form2Example1">Email</label>
+        <div className="mb-4 mt-5 login-inputs ">
+            <label className="form-label" htmlFor="form2Example1">Email</label>
             <div className="ms-3 col-md-4 col-xs-6">
-                <input value={user.email} onChange={evt => setUser({...user, email:evt.target.value})} type="email" id="form2Example1" class="form-control" />
+                <input value={user.email} onChange={evt => setUser({...user, email:evt.target.value})} type="email" id="form2Example1" className="form-control" />
             </div>
         </div>
 
-        <div class="mb-4 mt-5 login-inputs ">
-            <label class="form-label" for="form2Example1">Pass</label>
+        <div className="mb-4 mt-5 login-inputs ">
+            <label className="form-label" htmlFor="form2Example1">Pass</label>
             <div className="ms-3 col-md-4 col-xs-6">
-                <input value={user.pass} onChange={evt => setUser({...user, pass:evt.target.value})} type="password" id="form2Example1" class="form-control" />
+                <input value={user.pass} onChange={evt => setUser({...user, pass:evt.target.value})} type="password" id="form2Example2" className="form-control" />
             </div>
         </div>
 
 
-        <div class="mb-4 mt-5 login-inputs ">
+        <div className="mb-4 mt-5 login-inputs ">
             <button onClick={()=>{
                 login();
-            }} type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Login</button>
+            }} type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-4">Login</button>
         </div>
 
     </div>;
