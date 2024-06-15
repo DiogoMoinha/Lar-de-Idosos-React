@@ -128,12 +128,11 @@ function ListaIdoso(){
         </ul>
 
         <IdosoModals showDelete={showDelete} handleCloseModalDelete={handleCloseModalDelete} idIdosoToDelete={idIdosoToDelete}
-            handleCloseModalEdit={handleCloseModalEdit} setShowEdit={setShowEdit} setIdosoToEdit={setIdosoToEdit}
-            showEdit={showEdit} IdosoToEdit={IdosoToEdit}
+            handleCloseModalEdit={handleCloseModalEdit}  
         />
 
         <nav aria-label="Page navigation example">
-            <ul class="pagination">
+            <ul className="pagination">
                 <li class="page-item"><a class="page-link">Previous</a></li>
                 <li class="page-item" ><a class="page-link" onClick={()=>{setIdPagina(0)}}>1</a></li>
                 <li class="page-item"><a class="page-link" onClick={()=>{setIdPagina(1)}}>2</a></li>
