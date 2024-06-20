@@ -1,34 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getIdososAPIPaged } from "./service/api.jsx";
-import { AppContext } from "../App.jsx";
 
 import CreateIdoso from "./html/CreateTrabalhador.jsx";
 import IdosoItemLista from "./html/ListaIdosoItem.jsx";
-import IdosoModals from "./html/IdosoModals.jsx";
+import idosoObject from "./Idoso.jsx";
 
-// variavel que controla o modal de edit
-var idosoObject = {
-    id: 0,
-    Nome: '',
-    Idade: '',
-    Estado: 'Pendente',
-    Foto: ''
-}
+
 
 function ListaIdoso(){
-    const ctx = useContext(AppContext);
 
     const [ListaIdosos, setLista] = useState([{...idosoObject}])
 
     // id para paginação
     const [idPagina, setIdPagina] = useState(0);
     const [numPaginas, setNumPaginas] = useState(0);
-
-    // variavel que controla o modal do delete
-    const [showDelete, setShowDelete] = useState(false);
-    const [idIdosoToDelete, setIdIdosoToDelete] = useState(0);
-
-
 
 
     // atualiza a lista de Idosos da API
@@ -50,86 +35,20 @@ function ListaIdoso(){
         handleGetListaIdosos();
     }, [idPagina]);
 
-
-    // funcao a ser chamada pelo Modal de delete
-    const handleCloseModalDelete = (isToSave) => {
-        if (isToSave) {
-            deleteIdosoAPI(idIdosoToDelete, ctx.context.jwtToken)
-                .then((res) => {
-                    if(res.status==403)
-                        throw 'Por favor faça autenticação primeiro.'    
-                    return res.json();
-                })
-                .then((res) => {
-                    handleGetListaIdosos();
-                })
-                .catch(res => {
-                    alert(res);
-                });
-        }
-
-        setIdIdosoToDelete(0);
-        setShowDelete(false);
-    }
-
-
-    // funcao que inicializa o modal de delete
-    const handleModalDeleteIdoso = (id) => {
-        setIdIdosoToDelete(id);
-        setShowDelete(true);
-    }
-
-
-    const handleCloseModalEdit = (isToSave) => {
-        if (isToSave) {
-            editIdosoAPI(IdosoToEdit, ctx.context.jwtToken)
-                .then((res) => {
-                    if(res.status==403)
-                        throw 'Por favor faça autenticação primeiro.'
-                    return res.json();
-                })
-                .then((res) => {
-                    handleGetListaIdosos();
-                })
-                .catch(err => {
-                    alert(err)
-                });
-        }
-
-        setShowEdit(false);
-    }
-
-    // funcao que inicializa o modal de edit
-    const handleModalEditIdoso = (idoso) => {
-        setIdosoToEdit({
-            ...idoso,
-            Nome: idoso.Nome,
-            Idade: idoso.Idade,
-            Foto: idoso.Foto
-        });
-        setShowEdit(true);
-    }
-
     
     return <>
 
-    <CreateIdoso />
+    <button onClick={<CreateIdoso></CreateIdoso>}>Criar Idoso</button>
     
     <ul className="mt-5" style={{ overflowY: "scroll", height: "60vh" }}>
             {
                 ListaIdosos.length != 0 && ListaIdosos[0].id != 0 ?
-                    ListaIdosos.map((Idoso) => {
-                        return <IdosoItemLista IdosoProp={Idoso}
-                        handleModalDeleteIdosoProp={handleModalDeleteIdoso}
-                        handleModalEditIdosoProp={handleModalEditIdoso} />
+                    ListaIdosos.map((idoso) => {
+                        return <IdosoItemLista IdosoProp={idoso} />
                     }) :
                     ''
             }
         </ul>
-
-        <IdosoModals showDelete={showDelete} handleCloseModalDelete={handleCloseModalDelete} idIdosoToDelete={idIdosoToDelete}
-            handleCloseModalEdit={handleCloseModalEdit}  
-        />
 
         <nav aria-label="Page navigation example">
             <ul className="pagination">

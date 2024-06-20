@@ -1,5 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { deleteIdososAPI, editIdosoAPI } from "./service/api";
+import React, { useState, useContext } from "react";
+import { deleteIdosoAPI, editIdosoAPI } from "./service/api";
+import IdosoModals from "./html/IdosoModals";
+
 
 var idosoObject = {
     id: 0,
@@ -7,72 +9,89 @@ var idosoObject = {
     Idade: '',
     Estado: 'Pendente',
     Foto: ''
-}
+};
 
-
-//pagina para fazer o Idoso
-function Idoso(){
-
-      const [showEdit, setShowEdit] = useState(false);
-      const [IdosoToEdit, setIdosoToEdit] = useState({ ...IdosoObject });
-
-    useEffect(()=>{
-        
-    });
+function Idoso() {
+    const [showEdit, setShowEdit] = useState(false);
+    const [idosoToEdit, setIdosoToEdit] = useState({ ...idosoObject });
+    const [showDelete, setShowDelete] = useState(false);
+    const [idIdosoToDelete, setIdIdosoToDelete] = useState(0);
 
     const handleModalEditIdoso = (idoso) => {
         setIdosoToEdit({
             ...idoso,
-            Nome: idoso.Nome,
-            Idade: idoso.Idade,
             Foto: idoso.Foto.substring(0, 10)
         });
         setShowEdit(true);
-    }
+    };
 
     const handleCloseModalEdit = (isToSave) => {
         if (isToSave) {
-            editIdosoAPI(IdosoToEdit, ctx.context.jwtToken)
+            editIdosoAPI(idosoToEdit, ctx.context.jwtToken)
                 .then((res) => {
-                    if(res.status==403)
-                        throw 'Por favor faça autenticação primeiro.'
+                    if (res.status === 403) throw 'Por favor faça autenticação primeiro.';
                     return res.json();
                 })
                 .then((res) => {
                     handleGetListaIdosos();
                 })
                 .catch(err => {
-                    alert(err)
+                    alert(err);
                 });
         }
-
         setShowEdit(false);
-    }
+    };
 
+    const handleCloseModalDelete = (isToSave) => {
+        if (isToSave) {
+            deleteIdosoAPI(idIdosoToDelete, ctx.context.jwtToken)
+                .then((res) => {
+                    if (res.status === 403) throw 'Por favor faça autenticação primeiro.';
+                    return res.json();
+                })
+                .then((res) => {
+                    handleGetListaIdosos();
+                })
+                .catch(res => {
+                    alert(res);
+                });
+        }
+        setIdIdosoToDelete(0);
+        setShowDelete(false);
+    };
 
-    return <>
+    const handleModalDeleteIdoso = (id) => {
+        setIdIdosoToDelete(id);
+        setShowDelete(true);
+    };
 
-       <button onClick={handleModalEditIdosoProp={handleModalEditIdoso}}></button> 
+    return (
+        <>
+            <button onClick={() => handleModalEditIdoso(idosoToEdit)}>Edit Idoso</button>
+            <button onClick={() => handleModalDeleteIdoso(idosoToEdit.id)}>Delete Idoso</button>
 
-       <IdosoModals 
-            handleCloseModalEdit={handleCloseModalEdit} setShowEdit={setShowEdit} setIdosoToEdit={setIdosoToEdit}
-            showEdit={showEdit} IdosoToEdit={IdosoToEdit}
-        />
-       
+            <IdosoModals
+                showDelete={showDelete}
+                handleCloseModalDelete={handleCloseModalDelete}
+                idIdosoToDelete={idIdosoToDelete}
+                handleCloseModalEdit={handleCloseModalEdit}
+                setShowEdit={setShowEdit}
+                setIdosoToEdit={setIdosoToEdit}
+                showEdit={showEdit}
+                IdosoToEdit={idosoToEdit}
+            />
 
-        <div className="idosoPagina">
-            <div className="imageIdoso">
-                <img src="./image/idoso_icon.png" />
+            <div className="idosoPagina">
+                <div className="imageIdoso">
+                    <img src="./image/idoso_icon.png" alt="Idoso Icon" />
+                </div>
+                <div className="IdosoInformação">
+                    <label>Nome: {idosoToEdit.Nome}</label>
+                    <label>Idade: {idosoToEdit.Idade}</label>
+                </div>
             </div>
-            <div className="IdosoInformação">
-                <label>Nome: {idoso.Nome}</label>
-                <label>Idade: {idoso.Idade}</label>
-            </div>
-
-        </div>
-    
-    </>
-
+        </>
+    );
 }
 
 export default Idoso;

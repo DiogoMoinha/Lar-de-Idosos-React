@@ -1,14 +1,29 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from "react-router-dom";
 import { AppContext } from '../App';
+import App from '../App';
 
 export default function NavbarCust() {
     const ctx = useContext(AppContext);
 
     const navigate = useNavigate();
+
+    const [userId, atualizarUserId] = useState('');
+
+    const Sair = ({userId, atualizarUserId}) => {
+        const handleSair = () => {
+            // Update state
+            atualizarUserId('0');
+
+            // Perform navigation after state update
+            navigate('/home');
+        };
+    }
+
+
 
     return <Navbar expand="lg" className="bg-body-secondary">
         <Container>
@@ -26,7 +41,7 @@ export default function NavbarCust() {
                     
                     {ctx.context.userId == 0 ?<Nav.Link onClick={()=>navigate("/registar")}> Registar </Nav.Link> : ''}
 
-                    {ctx.context.userId != 0 ?<Nav.Link onClick={() =>navigate("/home")}> Sair </Nav.Link>: ''}
+                    {ctx.context.userId != 0 ?<Nav.Link onClick={()=>handleSair()}> Sair </Nav.Link>: ''}
                 </Nav>
 
                 {ctx.context.userId != 0 ? <Navbar.Text>

@@ -10,8 +10,6 @@ import NavbarCust from './app/Navbar';
 import FilterHoc from './app/service/FilterHoc';
 
 
-
-
 var contextInterface = {
   context: { themeIsLight: false, userId: 1 },
   setContext: () => { }
