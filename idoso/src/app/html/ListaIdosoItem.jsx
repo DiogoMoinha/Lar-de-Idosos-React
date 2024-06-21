@@ -7,13 +7,6 @@ export default function IdosoItemLista({IdosoProp, handleModalDeleteIdosoProp}) 
                 <h4>{IdosoProp.Idade}</h4>
                 <img>{IdosoProp.Foto}</img>
             </div>
-            <div className="col-md-4 col-sm-8">
-                <p>Concluir até {IdosoProp.dataConclusao}</p>
-            </div>
-            <div className="col-md-3 col-sm-4">
-                
-                
-            </div>
         </div>
     </li>;
 }

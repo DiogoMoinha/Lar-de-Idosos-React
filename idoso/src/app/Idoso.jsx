@@ -67,8 +67,8 @@ function Idoso() {
 
     return (
         <>
-            <button onClick={() => handleModalEditIdoso(idosoToEdit)}>Edit Idoso</button>
-            <button onClick={() => handleModalDeleteIdoso(idosoToEdit.id)}>Delete Idoso</button>
+            <button onClick={() => handleModalEditIdoso(idosoToEdit)}>Editar Idoso</button>
+            <button onClick={() => handleModalDeleteIdoso(idosoToEdit.id)}>Apagar Idoso</button>
 
             <IdosoModals
                 showDelete={showDelete}

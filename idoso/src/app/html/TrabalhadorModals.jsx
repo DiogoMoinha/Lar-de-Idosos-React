@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export default function Modals(
+export default function trabalhadorModals(
     {showDelete, handleCloseModalDelete, idTrabalhadorToDelete, 
         showEdit, setShowEdit, TrabalhadorToEdit, setTrabalhadorToEdit, handleCloseModalEdit}
     ) {
@@ -22,7 +22,7 @@ export default function Modals(
 
         <Modal size="lg" show={showEdit} onHide={() => (setShowEdit(false))}>
             <Modal.Header closeButton>
-                <Modal.Title>Editar o Trabalhador: <b>{TrabalhadorToEdit.id}</b></Modal.Title>
+                <Modal.Title>Editar o Trabalhador: <b>{TrabalhadorToEdit.Nome}</b></Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div className="row">

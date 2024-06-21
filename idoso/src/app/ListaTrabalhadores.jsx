@@ -2,18 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { getTrabalhadoresAPIPaged } from "./service/api.jsx";
 import { AppContext } from "../App.jsx";
 
-var trabalhadorObject = {
-    id: 0,
-    Nome: '',
-    Idade: '',
-    Foto: '',
-    Email: '',
-    NumTelemovel: '',
-    Tipo: '',
-    Descricao: ''
-    }
-    
+import TrabalhadorItemLista from "./html/ListaTrabalhadorItem.jsx";
+import CreateTrabalhador from "./html/CreateTrabalhador.jsx";
+import trabalhadorObject from "./Trabalhador.jsx";
 
+    
 function ListaTrabalhadores(){
     const ctx = useContext(AppContext);
     
@@ -22,10 +15,6 @@ function ListaTrabalhadores(){
     // id para paginação
     const [idPagina, setIdPagina] = useState(0);
     const [numPaginas, setNumPaginas] = useState(0);
-
-    // variavel que controla o modal do delete
-    const [showDelete, setShowDelete] = useState(false);
-    const [idTrabalhadoresToDelete, setIdTrabalhadoresToDelete] = useState(0);
 
 
     // atualiza a lista de Idosos da API
@@ -48,54 +37,7 @@ function ListaTrabalhadores(){
     }, [idPagina]);
 
 
-    // funcao a ser chamada pelo Modal de delete
-    const handleCloseModalDelete = (isToSave) => {
-        if (isToSave) {
-            deleteTrabalhadorAPI(idTrabalhadorToDelete, ctx.context.jwtToken)
-                .then((res) => {
-                    if(res.status==403)
-                        throw 'Por favor faça autenticação primeiro.'    
-                    return res.json();
-                })
-                .then((res) => {
-                    handleGetListaTrabalhadores();
-                })
-                .catch(res => {
-                    alert(res);
-                });
-        }
-
-        setIdTrabalhadoresToDelete(0);
-        setShowDelete(false);
-    }
-
-
-    // funcao que inicializa o modal de delete
-    const handleModalDeleteTrabalhador = (id) => {
-        setIdTrabalhadoresToDelete(id);
-        setShowDelete(true);
-    }
-
-
-    const handleCloseModalEdit = (isToSave) => {
-        if (isToSave) {
-            editTrabalhadorAPI(TrabalhadorToEdit, ctx.context.jwtToken)
-                .then((res) => {
-                    if(res.status==403)
-                        throw 'Por favor faça autenticação primeiro.'
-                    return res.json();
-                })
-                .then((res) => {
-                    handleGetListaTrabalhadores();
-                })
-                .catch(err => {
-                    alert(err)
-                });
-        }
-
-        setShowEdit(false);
-    }
-
+   
     
     return <>
 
@@ -105,18 +47,13 @@ function ListaTrabalhadores(){
             {
                 ListaTrabalhadores.length != 0 && ListaTrabalhadores[0].id != 0 ?
                     ListaTrabalhadores.map((Trabalhador) => {
-                        return <TodoItemLista TrabalhadorProp={Trabalhador}
-                        handleModalDeleteTrabalhadorProp={handleModalDeleteTrabalhador}
-                        handleModalEditTrabalhadorProp={handleModalEditTrabalhador} />
+                        return <TrabalhadorItemLista TrabalhadorProp={Trabalhador}/>
                     }) :
                     ''
             }
         </ul>
 
-        <TodoModals showDelete={showDelete} handleCloseModalDelete={handleCloseModalDelete} idTrabalhadoresToDelete={idTrabalhadoresToDelete}
-            handleCloseModalEdit={handleCloseModalEdit} setShowEdit={setShowEdit} setTrabalhadorToEdit={setTrabalhadorToEdit}
-            showEdit={showEdit} TrabalhadorToEdit={TrabalhadorToEdit}
-        />
+
 
         <nav aria-label="Page navigation example">
             <ul class="pagination">
