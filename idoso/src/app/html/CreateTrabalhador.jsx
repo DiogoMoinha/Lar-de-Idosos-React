@@ -70,25 +70,25 @@ export default function CreateTrabalhador() {
                         <p>Email: </p>
                     </div>
                     <div className="col-md-10">
-                        <input className="form-control" type="email" value={Email} onChange={evt => setName(evt.target.value)} />
+                        <input className="form-control" type="email" value={Email} onChange={evt => setEmail(evt.target.value)} />
                     </div>
                     <div className="col-md-2">
                         <p>Número de Telemovel: </p>
                     </div>
                     <div className="col-md-10">
-                        <input className="form-control" type="number" value={NumTelemovel} onChange={evt => setName(evt.target.value)} />
+                        <input className="form-control" type="number" value={NumTelemovel} onChange={evt => setNumTelemovel(evt.target.value)} />
                     </div>
                     <div className="col-md-2">
                         <p>Tipo: </p>
                     </div>
                     <div className="col-md-10">
-                        <input className="form-control" type="text" value={Tipo} onChange={evt => setName(evt.target.value)} />
+                        <input className="form-control" type="text" value={Tipo} onChange={evt => setTipo(evt.target.value)} />
                     </div>
                     <div className="col-md-2">
                         <p>Descrição: </p>
                     </div>
                     <div className="col-md-10">
-                        <input className="form-control" type="text" value={Descricao} onChange={evt => setName(evt.target.value)} />
+                        <input className="form-control" type="text" value={Descricao} onChange={evt => setDescricao(evt.target.value)} />
                     </div>
                 </div>
             </Modal.Body>
