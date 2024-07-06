@@ -9,14 +9,12 @@ export function loginAPI(email, pass) {
 
 export function getIdososAPI() {
     return fetch("https://laramanha.azurewebsites.net/api/values/ListaIdoso", {
-        mode: 'no-cors'
     })
 } 
 
 export function getIdososAPIPaged(idPagina) {
     return fetch("https://laramanha.azurewebsites.net/api/values/ListaIdosoPaged?idPagina=" + idPagina
         + "&paginaSize=5", {
-            mode: 'no-cors'
         });
 } 
 

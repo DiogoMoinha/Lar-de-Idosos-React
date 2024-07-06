@@ -16,11 +16,13 @@ var contextInterface = {
 }
 
 
+
 export const AppContext = createContext({ ...contextInterface });
 
 function App() {
   const [ctx, setCtx] = useState({ ...contextInterface.context });
   const [userId, setUserId] = useState('0');
+  
 
   const atualizarUserId = (userId) => {
     setUserId(1);

@@ -4,7 +4,7 @@ import { AppContext } from "../../App";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-export default function CreateIdosoModal({ show, handleClose }) {
+export default function CreateIdoso({ show, handleClose }) {
     const [Name, setName] = useState('');
     const [Idade, setIdade] = useState('');
     const [Foto, setFoto] = useState('');
@@ -38,7 +38,7 @@ export default function CreateIdosoModal({ show, handleClose }) {
             });
     }
 
-    return (
+    return <>
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Criar Idoso</Modal.Title>
@@ -70,5 +70,5 @@ export default function CreateIdosoModal({ show, handleClose }) {
                 <Button variant="primary" onClick={handleCreateIdoso}>Criar</Button>
             </Modal.Footer>
         </Modal>
-    );
+        </>
 }

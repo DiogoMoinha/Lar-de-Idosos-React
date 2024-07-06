@@ -4,7 +4,7 @@ import { AppContext } from "../../App";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-export default function CreateTrabalhador() {
+export default function CreateTrabalhador({ show, handleClose }) {
     const [Name, setName] = useState('');
     const [Idade, setIdade] = useState('');
     const [Foto, setFoto] = useState('');
@@ -97,6 +97,6 @@ export default function CreateTrabalhador() {
                 <Button variant="primary" onClick={handleCreateTrabalhador}>Criar</Button>
             </Modal.Footer>
         </Modal>
-    </>
+        </>
 
 }

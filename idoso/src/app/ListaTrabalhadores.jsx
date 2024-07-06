@@ -41,7 +41,7 @@ function ListaTrabalhadores(){
     
     return <>
 
-    <CreateTrabalhador />
+<button onClick={CreateTrabalhador}>Criar Trabalhador</button>
     
     <ul className="mt-5" style={{ overflowY: "scroll", height: "60vh" }}>
             {
@@ -56,12 +56,12 @@ function ListaTrabalhadores(){
 
 
         <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link">Previous</a></li>
-                <li class="page-item" ><a class="page-link" onClick={()=>{setIdPagina(0)}}>1</a></li>
-                <li class="page-item"><a class="page-link" onClick={()=>{setIdPagina(1)}}>2</a></li>
-                <li class="page-item"><a class="page-link" onClick={()=>{setIdPagina(2)}}>3</a></li>
-                <li class="page-item"><a class="page-link" >Next</a></li>
+            <ul className="pagination">
+                <li className="page-item"><a class="page-link">Previous</a></li>
+                <li className="page-item" ><a class="page-link" onClick={()=>{setIdPagina(0)}}>1</a></li>
+                <li className="page-item"><a class="page-link" onClick={()=>{setIdPagina(1)}}>2</a></li>
+                <li className="page-item"><a class="page-link" onClick={()=>{setIdPagina(2)}}>3</a></li>
+                <li className="page-item"><a class="page-link" >Next</a></li>
             </ul>
         </nav>
     

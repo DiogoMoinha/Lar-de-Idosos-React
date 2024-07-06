@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getIdososAPIPaged } from "./service/api.jsx";
+import { getIdososAPI } from "./service/api.jsx";
 
 import CreateIdoso from "./html/CreateTrabalhador.jsx";
 import IdosoItemLista from "./html/ListaIdosoItem.jsx";
@@ -24,7 +24,7 @@ function ListaIdoso(){
 
     // atualiza a lista de Idosos da API
     const handleGetListaIdosos = () => {
-        getIdososAPIPaged(idPagina)
+            getIdososAPI()
             .then((res) => {
                 return res.json();
             })
@@ -44,7 +44,7 @@ function ListaIdoso(){
     
     return <>
 
-    <button onClick={<CreateIdoso></CreateIdoso>}>Criar Idoso</button>
+    <button onClick={CreateIdoso}>Criar Idoso</button>
     
         <ul className="mt-5" style={{ overflowY: "scroll", height: "60vh" }}>
             {
@@ -58,11 +58,11 @@ function ListaIdoso(){
 
         <nav aria-label="Page navigation example">
             <ul className="pagination">
-                <li class="page-item"><a class="page-link">Previous</a></li>
-                <li class="page-item" ><a class="page-link" onClick={()=>{setIdPagina(0)}}>1</a></li>
-                <li class="page-item"><a class="page-link" onClick={()=>{setIdPagina(1)}}>2</a></li>
-                <li class="page-item"><a class="page-link" onClick={()=>{setIdPagina(2)}}>3</a></li>
-                <li class="page-item"><a class="page-link" >Next</a></li>
+                <li className="page-item"><a className="page-link">Previous</a></li>
+                <li className="page-item"><a className="page-link" onClick={()=>{setIdPagina(0)}}>1</a></li>
+                <li className="page-item"><a className="page-link" onClick={()=>{setIdPagina(1)}}>2</a></li>
+                <li className="page-item"><a className="page-link" onClick={()=>{setIdPagina(2)}}>3</a></li>
+                <li className="page-item"><a className="page-link" >Next</a></li>
             </ul>
         </nav>
     
