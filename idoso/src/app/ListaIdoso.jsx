@@ -20,7 +20,7 @@ function ListaIdoso(){
     // id para paginação
     const [idPagina, setIdPagina] = useState(0);
     const [numPaginas, setNumPaginas] = useState(0);
-
+    
 
     // atualiza a lista de Idosos da API
     const handleGetListaIdosos = () => {

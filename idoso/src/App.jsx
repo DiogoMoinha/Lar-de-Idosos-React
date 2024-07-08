@@ -8,14 +8,13 @@ import ListaIdoso from './app/ListaIdoso';
 import ListaTrabalhadores from './app/ListaTrabalhadores';
 import NavbarCust from './app/Navbar';
 import FilterHoc from './app/service/FilterHoc';
+import DataFetcher from './app/components/Datafetcher';
 
 
 var contextInterface = {
-  context: { themeIsLight: false, userId: 1 },
+  context: { themeIsLight: false, userId: 0 },
   setContext: () => { }
 }
-
-
 
 export const AppContext = createContext({ ...contextInterface });
 
@@ -33,6 +32,7 @@ function App() {
       <AppContext.Provider value={{ context: ctx, setContext: setCtx }} >
         <div className={(ctx.themeIsLight ? "bg-light text-dark" : "bg-dark text-white") + ' container'}>
           <div className='row'>
+            <DataFetcher />
             <NavbarCust />
             <FilterHoc>
               <Routes>
