@@ -1,10 +1,26 @@
 
 export function loginAPI(email, pass) {
-    return fetch("https://laramanha.azurewebsites.net/api/Values/Login?email="+email+"&password="+pass+"", {
+    return fetch("https://laramanha.azurewebsites.net/api/values/Login", {
         headers: {
             Accept: "*/*"
         },
         method: "POST"
+    })
+}
+
+export function registarAPI(nome, email, password, numTel){
+    return fetch('https://laramanha.azurewebsites.net/api/values/Registar', {
+        method: 'POST',
+        headers: {
+            'accept': '*/*',
+            'Content-Type': 'application/json'
+    },
+        body: JSON.stringify({
+            'Nome': nome,
+            'Email': email,
+            'Password': password,
+            'NumTelemovel': numTel,
+        })
     })
 }
 
@@ -28,21 +44,7 @@ export function getTrabalhadoresAPIPaged(idPagina) {
         + "&paginaSize=5")
 }
 
-export function registarAPI(nome, email, password, numTel){
-    return fetch('https://laramanha.azurewebsites.net/api/values/Registar', {
-        method: 'POST',
-        headers: {
-            'accept': '*/*',
-            'Content-Type': 'application/json'
-    },
-        body: JSON.stringify({
-            'Nome': nome,
-            'Email': email,
-            'Password': password,
-            'NumTelemovel': numTel,
-        })
-    })
-}
+
 
 export function createIdosoAPI(Idoso, token) {
     return fetch("https://laramanha.azurewebsites.net/api/values/createIdoso", {

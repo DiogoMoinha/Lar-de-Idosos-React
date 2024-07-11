@@ -55,16 +55,6 @@ function ListaIdoso(){
                     ''
             }
         </ul>
-
-        <nav aria-label="Page navigation example">
-            <ul className="pagination">
-                <li className="page-item"><a className="page-link">Previous</a></li>
-                <li className="page-item"><a className="page-link" onClick={()=>{setIdPagina(0)}}>1</a></li>
-                <li className="page-item"><a className="page-link" onClick={()=>{setIdPagina(1)}}>2</a></li>
-                <li className="page-item"><a className="page-link" onClick={()=>{setIdPagina(2)}}>3</a></li>
-                <li className="page-item"><a className="page-link" >Next</a></li>
-            </ul>
-        </nav>
     
     </>
 

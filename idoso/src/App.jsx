@@ -8,7 +8,7 @@ import ListaIdoso from './app/ListaIdoso';
 import ListaTrabalhadores from './app/ListaTrabalhadores';
 import NavbarCust from './app/Navbar';
 import FilterHoc from './app/service/FilterHoc';
-import DataFetcher from './app/components/Datafetcher';
+//import DataFetcher from './app/components/Datafetcher';
 
 
 var contextInterface = {
@@ -21,7 +21,7 @@ export const AppContext = createContext({ ...contextInterface });
 function App() {
   const [ctx, setCtx] = useState({ ...contextInterface.context });
   const [userId, setUserId] = useState('0');
-  
+
 
   const atualizarUserId = (userId) => {
     setUserId(1);
@@ -32,7 +32,6 @@ function App() {
       <AppContext.Provider value={{ context: ctx, setContext: setCtx }} >
         <div className={(ctx.themeIsLight ? "bg-light text-dark" : "bg-dark text-white") + ' container'}>
           <div className='row'>
-            <DataFetcher />
             <NavbarCust />
             <FilterHoc>
               <Routes>
