@@ -63,6 +63,18 @@ export default function IdosoModals({
                                 onChange={evt => setIdosoToEdit({ ...IdosoToEdit, Estado: evt.target.value })}
                             />
                         </div>
+
+                        <div className="col-md-3">
+                            <p>Guardiao: </p>
+                        </div>
+                        <div className="col-md-3">
+                            <input
+                                className="form-control"
+                                type="text"
+                                value={IdosoToEdit?.Guardiao || ''}
+                                onChange={evt => setIdosoToEdit({ ...IdosoToEdit, Guardiao: evt.target.value })}
+                            />
+                        </div>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

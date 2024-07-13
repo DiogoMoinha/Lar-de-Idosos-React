@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { getIdososAPI } from "./service/api.jsx";
-import CreateIdoso from "./html/CreateTrabalhador.jsx";
+import CreateIdoso from "./html/CreateIdoso.jsx";
 import IdosoItemLista from "./html/ListaIdosoItem.jsx";
 
 var idosoObject = {
@@ -19,6 +19,12 @@ var idosoObject = {
 function ListaIdoso() {
     const [ListaIdosos, setLista] = useState([idosoObject]);
     const navigate = useNavigate();
+
+    const [showCreateIdoso, setShowCreateIdoso] = useState(false);
+
+    const handleCloseCreateIdoso = () => setShowCreateIdoso(false);
+    const handleShowCreateIdoso = () => setShowCreateIdoso(true);
+
 
     const handleGetListaIdosos = () => {
         getIdososAPI()
@@ -45,12 +51,14 @@ function ListaIdoso() {
     }, []);
 
     const handleItemClick = (id) => {
-        navigate(`/idoso/${id}`);
+        navigate(`/Idosos/${id}`);
     };
 
     return (
         <>
-            <button onClick={CreateIdoso}>Criar Idoso</button>
+            <button onClick={handleShowCreateIdoso}>Adicionar Idoso</button>
+            <CreateIdoso show={showCreateIdoso} handleClose={handleCloseCreateIdoso} />
+
             <ul className="mt-5" style={{ overflowY: "scroll", height: "60vh" }}>
                 {Array.isArray(ListaIdosos) && ListaIdosos.length > 0 ? (
                     ListaIdosos.map((idoso) => (

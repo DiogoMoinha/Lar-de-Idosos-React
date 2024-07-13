@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { createIdosoAPI } from "../../service/api";
+import { createIdosoAPI } from "../service/api";
 import { AppContext } from "../../App";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -8,6 +8,10 @@ export default function CreateIdoso({ show, handleClose }) {
     const [Name, setName] = useState('');
     const [Idade, setIdade] = useState('');
     const [Foto, setFoto] = useState('');
+    const [guardiao,setGuardiao] = useState('');
+    const [guardiaoFK,setGuardiaoFK] = useState('');
+    const [ListaConsultas,setListaConsultas] = useState([]);
+    const [ListaTrabalhadores,setListaTrabalhadores] = useState([]);
 
 
     const ctx = useContext(AppContext);
@@ -18,7 +22,13 @@ export default function CreateIdoso({ show, handleClose }) {
             return;
         }
 
-        let Idoso = { Nome: Name, idade: Idade, estado: "Pendente" };
+        let Idoso = { Nome: Name, 
+            idade: Idade, 
+            estado: "Pendente", 
+            guardiao: '', 
+            guardiaoFK: '', 
+            listaConsultas: [], 
+            listaTrabalhadores: [] };
 
         let form = new FormData();
         form.append('Foto', Foto);
@@ -38,7 +48,7 @@ export default function CreateIdoso({ show, handleClose }) {
             });
     }
 
-    return <>
+    return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Criar Idoso</Modal.Title>
@@ -63,6 +73,30 @@ export default function CreateIdoso({ show, handleClose }) {
                     <div className="col-md-10">
                         <input className="form-control" type="file" onChange={evt => setFoto(evt.target.files[0])} />
                     </div>
+                    <div className="col-md-2">
+                        <p>Guardiao: </p>
+                    </div>
+                    <div className="col-md-10">
+                        <input className="form-control" type="text" value={guardiao} onChange={evt => setGuardiao(evt.target.value)} />
+                    </div>
+                    <div className="col-md-2">
+                        <p>GuardiaoFK: </p>
+                    </div>
+                    <div className="col-md-10">
+                        <input className="form-control" type="text" value={guardiaoFK} onChange={evt => setGuardiaoFK(evt.target.value)} />
+                    </div>
+                    <div className="col-md-2">
+                        <p>Lista de Consultas: </p>
+                    </div>
+                    <div className="col-md-10">
+                        <input className="form-control" type="text" value={ListaConsultas} onChange={evt => setListaConsultas(evt.target.value)} />
+                    </div>
+                    <div className="col-md-2">
+                        <p>Lista de Enfermeiros: </p>
+                    </div>
+                    <div className="col-md-10">
+                        <input className="form-control" type="text" value={ListaTrabalhadores} onChange={evt => setListaTrabalhadores(evt.target.value)} />
+                    </div>
                 </div>
             </Modal.Body>
             <Modal.Footer>
@@ -70,5 +104,5 @@ export default function CreateIdoso({ show, handleClose }) {
                 <Button variant="primary" onClick={handleCreateIdoso}>Criar</Button>
             </Modal.Footer>
         </Modal>
-        </>
+    );
 }

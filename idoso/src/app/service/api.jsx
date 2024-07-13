@@ -52,7 +52,7 @@ export function getTrabalhadoresAPIPaged(idPagina) {
 
 
 export function createIdosoAPI(Idoso, token) {
-    return fetch("https://laramanha.azurewebsites.net/api/values/createIdoso", {
+    return fetch("https://laramanha.azurewebsites.net/api/values/CreateIdoso", {
         body: JSON.stringify(Idoso),
         headers: {
             Accept: "*/*",
@@ -64,7 +64,7 @@ export function createIdosoAPI(Idoso, token) {
 }
 
 export function createTrabalhadorAPI(Trabalhador, token) {
-    return fetch("https://laramanha.azurewebsites.net/api/values/createTrabalhador", {
+    return fetch("https://laramanha.azurewebsites.net/api/values/RegistarTrab", {
         body: JSON.stringify(Trabalhador),
         headers: {
             Accept: "*/*",
@@ -96,12 +96,12 @@ export function deleteTrabalhadorAPI(id, token) {
 }
 
 export function editIdosoAPI(idosoAEditar, token) {
-    return fetch("https://laramanha.azurewebsites.net/api/values/updateIdoso?Idosoid=" + idosoAEditar.id, {
+    return fetch("https://laramanha.azurewebsites.net/api/values/ListaIdoso?Idosoid=" + idosoAEditar.id, {
         body: JSON.stringify(idosoAEditar),
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json",
-            Authorization: "Bearer "+token
+            //Authorization: "Bearer "+token
         },
         method: "PUT"
     })

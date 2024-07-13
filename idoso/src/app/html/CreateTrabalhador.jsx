@@ -44,7 +44,7 @@ export default function CreateTrabalhador({ show, handleClose }) {
     return <>
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Criar Trabalhador</Modal.Title>
+                <Modal.Title>Registar Trabalhador</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div className="row">

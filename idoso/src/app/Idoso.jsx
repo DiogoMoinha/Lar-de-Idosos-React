@@ -1,23 +1,34 @@
-import React, { useState, useContext } from "react";
-import { deleteIdosoAPI, editIdosoAPI } from "./service/api";
+import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
+import { deleteIdosoAPI, editIdosoAPI, getIdososAPI } from "./service/api";
 import IdosoModals from "./html/IdosoModals";
 
-
+var idosoObject = {
+    id: 0,
+    nome: '',
+    idade: '',
+    foto: '',
+    estado: '0',
+    guardiao: '',
+    guardiaoFK: '',
+    listaConsultas: [],
+    listaTrabalhadores: []
+};
 
 function Idoso() {
     const { id } = useParams();
+    const [idoso, setIdoso] = useState({ ...idosoObject });
     const [showEdit, setShowEdit] = useState(false);
     const [idosoToEdit, setIdosoToEdit] = useState({ ...idosoObject });
     const [showDelete, setShowDelete] = useState(false);
     const [idIdosoToDelete, setIdIdosoToDelete] = useState(0);
 
     useEffect(() => {
-        // Fetch the details of the idoso with the given id
         getIdososAPI()
             .then((res) => res.json())
             .then((res) => {
                 const foundIdoso = res.find((i) => i.id === parseInt(id));
-                setIdoso(foundIdoso);
+                setIdoso(foundIdoso || { ...idosoObject });
             })
             .catch((error) => {
                 console.error('API Error:', error);
@@ -25,24 +36,22 @@ function Idoso() {
             });
     }, [id]);
 
-
     const handleModalEditIdoso = (idoso) => {
         setIdosoToEdit({
-            ...idoso,
-            Foto: idoso.Foto.substring(0, 10)
+            ...idoso
         });
         setShowEdit(true);
     };
 
     const handleCloseModalEdit = (isToSave) => {
         if (isToSave) {
-            editIdosoAPI(idosoToEdit, ctx.context.jwtToken)
+            editIdosoAPI(idosoToEdit)
                 .then((res) => {
                     if (res.status === 403) throw 'Por favor faça autenticação primeiro.';
                     return res.json();
                 })
                 .then((res) => {
-                    handleGetListaIdosos();
+                    // Refresh data after editing
                 })
                 .catch(err => {
                     alert(err);
@@ -59,7 +68,7 @@ function Idoso() {
                     return res.json();
                 })
                 .then((res) => {
-                    handleGetListaIdosos();
+                    // Refresh data after deleting
                 })
                 .catch(res => {
                     alert(res);
@@ -76,8 +85,8 @@ function Idoso() {
 
     return (
         <>
-            <button onClick={() => handleModalEditIdoso(idosoToEdit)}>Editar Idoso</button>
-            <button onClick={() => handleModalDeleteIdoso(idosoToEdit.id)}>Apagar Idoso</button>
+            <button onClick={() => handleModalEditIdoso(idoso)}>Editar Idoso</button>
+            <button onClick={() => handleModalDeleteIdoso(idoso.id)}>Apagar Idoso</button>
 
             <IdosoModals
                 showDelete={showDelete}
@@ -95,8 +104,8 @@ function Idoso() {
             <p>Foto: <img src={idoso.foto} alt={idoso.nome} /></p>
             <p>Estado: {idoso.estado}</p>
             <p>Guardiao: {idoso.guardiao}</p>
-            <p>Lista de Consultas: {idoso.listaConsultas.join(', ')}</p>
-            <p>Lista de Trabalhadores: {idoso.listaTrabalhadores.join(', ')}</p>
+            <p>Consultas: {idoso.listaConsultas.join(', ')}</p>
+            <p>Enfermeiros responsáveis: {idoso.listaTrabalhadores.join(', ')}</p>
         </>
     );
 }
