@@ -1,72 +1,63 @@
 import { useContext, useEffect, useState } from "react";
-import { getTrabalhadoresAPIPaged } from "./service/api.jsx";
+import { getTrabalhadoresAPI } from "./service/api.jsx";
 import { AppContext } from "../App.jsx";
-
 import TrabalhadorItemLista from "./html/ListaTrabalhadorItem.jsx";
 import CreateTrabalhador from "./html/CreateTrabalhador.jsx";
-import trabalhadorObject from "./Trabalhador.jsx";
 
-    
-function ListaTrabalhadores(){
+var trabalhadorObject = {
+    id: 0,
+    nome: '',
+    idade: '',
+    foto: '',
+    email: '',
+    numTelemovel: '',
+    tipo: '',
+    descricao: ''
+};
+
+function ListaTrabalhadores() {
     const ctx = useContext(AppContext);
-    
-    const [ListaTrabalhadores, setLista] = useState([{...trabalhadorObject}])
+    const [ListaTrabalhadores, setLista] = useState([trabalhadorObject]);
 
-    // id para paginação
-    const [idPagina, setIdPagina] = useState(0);
-    const [numPaginas, setNumPaginas] = useState(0);
-
-
-    // atualiza a lista de Idosos da API
+    // atualiza a lista de Trabalhadores da API
     const handleGetListaTrabalhadores = () => {
-        getTrabalhadoresAPIPaged(idPagina)
+        getTrabalhadoresAPI()
+            .then((res) => res.json())
             .then((res) => {
-                return res.json();
-            })
-            .then((res) => {
-                setLista(res.rows);
-                setNumPaginas(res.message);
+                console.log('API Response:', res);  // Log the API response
+                if (Array.isArray(res)) {
+                    setLista(res);
+                } else if (Array.isArray(res.rows)) {
+                    setLista(res.rows);
+                } else {
+                    console.error('Unexpected API response format:', res);
+                    setLista([]);
+                }
             })
             .catch((error) => {
-                alert(error);
+                console.error('API Error:', error);
+                alert('Failed to fetch data from API.');
             });
-    }
+    };
 
-    useEffect(()=>{
+    useEffect(() => {
         handleGetListaTrabalhadores();
-    }, [idPagina]);
+    }, []);
 
-
-   
-    
-    return <>
-
-<button onClick={CreateTrabalhador}>Criar Trabalhador</button>
-    
-    <ul className="mt-5" style={{ overflowY: "scroll", height: "60vh" }}>
-            {
-                ListaTrabalhadores.length != 0 && ListaTrabalhadores[0].id != 0 ?
-                    ListaTrabalhadores.map((Trabalhador) => {
-                        return <TrabalhadorItemLista TrabalhadorProp={Trabalhador}/>
-                    }) :
-                    ''
-            }
-        </ul>
-
-
-
-        <nav aria-label="Page navigation example">
-            <ul className="pagination">
-                <li className="page-item"><a class="page-link">Previous</a></li>
-                <li className="page-item" ><a class="page-link" onClick={()=>{setIdPagina(0)}}>1</a></li>
-                <li className="page-item"><a class="page-link" onClick={()=>{setIdPagina(1)}}>2</a></li>
-                <li className="page-item"><a class="page-link" onClick={()=>{setIdPagina(2)}}>3</a></li>
-                <li className="page-item"><a class="page-link" >Next</a></li>
+    return (
+        <>
+            <button onClick={CreateTrabalhador}>Criar Trabalhador</button>
+            <ul className="mt-5" style={{ overflowY: "scroll", height: "60vh" }}>
+                {Array.isArray(ListaTrabalhadores) && ListaTrabalhadores.length > 0 ? (
+                    ListaTrabalhadores.map((Trabalhador) => (
+                        <TrabalhadorItemLista key={Trabalhador.id} TrabalhadorProp={Trabalhador} />
+                    ))
+                ) : (
+                    <p>No data available</p>
+                )}
             </ul>
-        </nav>
-    
-    </>
-
+        </>
+    );
 }
 
 export default ListaTrabalhadores;

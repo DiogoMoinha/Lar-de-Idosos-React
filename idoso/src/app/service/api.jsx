@@ -4,7 +4,11 @@ export function loginAPI(email, pass) {
         headers: {
             Accept: "*/*"
         },
-        method: "POST"
+        method: "POST",
+        body: JSON.stringify({
+            'Email': email,
+            'Password': pass,
+        })
     })
 }
 
@@ -14,12 +18,12 @@ export function registarAPI(nome, email, password, numTel){
         headers: {
             'accept': '*/*',
             'Content-Type': 'application/json'
-    },
+        },
         body: JSON.stringify({
             'Nome': nome,
             'Email': email,
             'Password': password,
-            'NumTelemovel': numTel,
+            'NumTelemovel': numTel
         })
     })
 }
@@ -38,6 +42,7 @@ export function getIdososAPIPaged(idPagina) {
 export function getTrabalhadoresAPI() {
     return fetch("https://laramanha.azurewebsites.net/api/values/ListaTrabalhador")
 }
+
 
 export function getTrabalhadoresAPIPaged(idPagina) {
     return fetch("https://laramanha.azurewebsites.net/api/values/ListaTrabalhadorPaged?idPagina=" + idPagina

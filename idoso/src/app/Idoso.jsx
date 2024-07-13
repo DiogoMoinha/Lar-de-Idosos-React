@@ -3,19 +3,28 @@ import { deleteIdosoAPI, editIdosoAPI } from "./service/api";
 import IdosoModals from "./html/IdosoModals";
 
 
-var idosoObject = {
-    id: 0,
-    Nome: '',
-    Idade: '',
-    Estado: 'Pendente',
-    Foto: ''
-};
 
 function Idoso() {
+    const { id } = useParams();
     const [showEdit, setShowEdit] = useState(false);
     const [idosoToEdit, setIdosoToEdit] = useState({ ...idosoObject });
     const [showDelete, setShowDelete] = useState(false);
     const [idIdosoToDelete, setIdIdosoToDelete] = useState(0);
+
+    useEffect(() => {
+        // Fetch the details of the idoso with the given id
+        getIdososAPI()
+            .then((res) => res.json())
+            .then((res) => {
+                const foundIdoso = res.find((i) => i.id === parseInt(id));
+                setIdoso(foundIdoso);
+            })
+            .catch((error) => {
+                console.error('API Error:', error);
+                alert('Failed to fetch data from API.');
+            });
+    }, [id]);
+
 
     const handleModalEditIdoso = (idoso) => {
         setIdosoToEdit({
@@ -81,15 +90,13 @@ function Idoso() {
                 IdosoToEdit={idosoToEdit}
             />
 
-            <div className="idosoPagina">
-                <div className="imageIdoso">
-                    <img src="./image/idoso_icon.png" alt="Idoso Icon" />
-                </div>
-                <div className="IdosoInformação">
-                    <label>Nome: {idosoToEdit.Nome}</label>
-                    <label>Idade: {idosoToEdit.Idade}</label>
-                </div>
-            </div>
+            <h1>{idoso.nome}</h1>
+            <p>Idade: {idoso.idade}</p>
+            <p>Foto: <img src={idoso.foto} alt={idoso.nome} /></p>
+            <p>Estado: {idoso.estado}</p>
+            <p>Guardiao: {idoso.guardiao}</p>
+            <p>Lista de Consultas: {idoso.listaConsultas.join(', ')}</p>
+            <p>Lista de Trabalhadores: {idoso.listaTrabalhadores.join(', ')}</p>
         </>
     );
 }

@@ -8,11 +8,12 @@ import ListaIdoso from './app/ListaIdoso';
 import ListaTrabalhadores from './app/ListaTrabalhadores';
 import NavbarCust from './app/Navbar';
 import FilterHoc from './app/service/FilterHoc';
+import Idoso from './app/Idoso';
 //import DataFetcher from './app/components/Datafetcher';
 
 
 var contextInterface = {
-  context: { themeIsLight: false, userId: 0 },
+  context: { themeIsLight: false, userId: 1 },
   setContext: () => { }
 }
 
@@ -38,6 +39,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home userId={userId} atualizarUserId={atualizarUserId} />} />
                 <Route path="/Idosos" element={<ListaIdoso />} />
+                <Route path="/Idosos/:id" element={<Idoso />} />
                 <Route path='/Trabalhadores' element={<ListaTrabalhadores />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/registar" element={<CreateUser />} />

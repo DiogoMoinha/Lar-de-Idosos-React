@@ -1,63 +1,71 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { getIdososAPI } from "./service/api.jsx";
-
 import CreateIdoso from "./html/CreateTrabalhador.jsx";
 import IdosoItemLista from "./html/ListaIdosoItem.jsx";
 
-
 var idosoObject = {
     id: 0,
-    Nome: '',
-    Idade: '',
-    Estado: 'Pendente',
-    Foto: ''
+    nome: '',
+    idade: '',
+    foto: '',
+    estado: '0',
+    guardiao: '',
+    guardiaoFK: '',
+    listaConsultas: [],
+    listaTrabalhadores: []
 };
 
-function ListaIdoso(){
+function ListaIdoso() {
+    const [ListaIdosos, setLista] = useState([idosoObject]);
+    const navigate = useNavigate();
 
-    const [ListaIdosos, setLista] = useState([{...idosoObject}])
-
-    // id para paginação
-    const [idPagina, setIdPagina] = useState(0);
-    const [numPaginas, setNumPaginas] = useState(0);
-    
-
-    // atualiza a lista de Idosos da API
     const handleGetListaIdosos = () => {
-            getIdososAPI()
+        getIdososAPI()
+            .then((res) => res.json())
             .then((res) => {
-                return res.json();
-            })
-            .then((res) => {
-                setLista(res.rows);
-                setNumPaginas(res.message);
+                console.log('API Response:', res);
+                if (Array.isArray(res)) {
+                    setLista(res);
+                } else if (Array.isArray(res.rows)) {
+                    setLista(res.rows);
+                } else {
+                    console.error('Unexpected API response format:', res);
+                    setLista([]);
+                }
             })
             .catch((error) => {
-                alert(error);
+                console.error('API Error:', error);
+                alert('Failed to fetch data from API.');
             });
-    }
+    };
 
-    useEffect(()=>{
+    useEffect(() => {
         handleGetListaIdosos();
-    }, [idPagina]);
+    }, []);
 
-    
-    return <>
+    const handleItemClick = (id) => {
+        navigate(`/idoso/${id}`);
+    };
 
-    <button onClick={CreateIdoso}>Criar Idoso</button>
-    
-        <ul className="mt-5" style={{ overflowY: "scroll", height: "60vh" }}>
-            {
-                ListaIdosos.length != 0 && ListaIdosos[0].id != 0 ?
-                    ListaIdosos.map((idoso) => {
-                        return <IdosoItemLista IdosoProp={idoso} />
-                    }) :
-                    ''
-            }
-        </ul>
-    
-    </>
-
+    return (
+        <>
+            <button onClick={CreateIdoso}>Criar Idoso</button>
+            <ul className="mt-5" style={{ overflowY: "scroll", height: "60vh" }}>
+                {Array.isArray(ListaIdosos) && ListaIdosos.length > 0 ? (
+                    ListaIdosos.map((idoso) => (
+                        <IdosoItemLista
+                            key={idoso.id}
+                            IdosoProp={idoso}
+                            onItemClick={handleItemClick}
+                        />
+                    ))
+                ) : (
+                    <p>No data available</p>
+                )}
+            </ul>
+        </>
+    );
 }
 
 export default ListaIdoso;
