@@ -62,7 +62,7 @@ function Idoso() {
 
     const handleCloseModalDelete = (isToSave) => {
         if (isToSave) {
-            deleteIdosoAPI(idIdosoToDelete, ctx.context.jwtToken)
+            deleteIdosoAPI(idIdosoToDelete)
                 .then((res) => {
                     if (res.status === 403) throw 'Por favor faça autenticação primeiro.';
                     return res.json();

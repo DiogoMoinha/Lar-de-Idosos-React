@@ -40,7 +40,8 @@ export function getIdososAPIPaged(idPagina) {
 } 
 
 export function getTrabalhadoresAPI() {
-    return fetch("https://laramanha.azurewebsites.net/api/values/ListaTrabalhador")
+    return fetch("https://laramanha.azurewebsites.net/api/values/ListaTrabalhador", {
+    })
 }
 
 
@@ -76,17 +77,16 @@ export function createTrabalhadorAPI(Trabalhador, token) {
 }
 
 export function deleteIdosoAPI(id, token) {
-    return fetch("https://laramanha.azurewebsites.net/api/values/deleteIdoso?idIdoso=" + id, {
+    return fetch("https://laramanha.azurewebsites.net/api/values/ListaIdoso?idIdoso=" + id, {
         headers: {
             Accept: "*/*",
-            Authorization: "Bearer "+token,
         },
         method: "DELETE"
     })
 }
 
 export function deleteTrabalhadorAPI(id, token) {
-    return fetch("https://laramanha.azurewebsites.net/api/values/deleteTrabalhador?idTrabalhador=" + id, {
+    return fetch("https://laramanha.azurewebsites.net/api/values/ListaTrabalhador?idTrabalhador=" + id, {
         headers: {
             Accept: "*/*",
             Authorization: "Bearer "+token,

@@ -19,6 +19,12 @@ function ListaTrabalhadores() {
     const ctx = useContext(AppContext);
     const [ListaTrabalhadores, setLista] = useState([trabalhadorObject]);
 
+    const [showCreateTrabalhador, setShowCreateTrabalhador] = useState(false);
+
+    const handleCloseCreateTrabalhador = () => setShowCreateTrabalhador(false);
+    const handleShowCreateTrabalhador = () => setShowCreateTrabalhador(true);
+
+
     // atualiza a lista de Trabalhadores da API
     const handleGetListaTrabalhadores = () => {
         getTrabalhadoresAPI()
@@ -46,7 +52,9 @@ function ListaTrabalhadores() {
 
     return (
         <>
-            <button onClick={CreateTrabalhador}>Criar Trabalhador</button>
+            <button onClick={handleShowCreateTrabalhador}>Adicionar Idoso</button>
+            <CreateTrabalhador show={showCreateTrabalhador} handleClose={handleCloseCreateTrabalhador} />
+
             <ul className="mt-5" style={{ overflowY: "scroll", height: "60vh" }}>
                 {Array.isArray(ListaTrabalhadores) && ListaTrabalhadores.length > 0 ? (
                     ListaTrabalhadores.map((Trabalhador) => (
