@@ -20,8 +20,6 @@ export default function NavbarCust() {
     return (
         <Navbar expand="lg" className="bg-body-secondary">
             <Container>
-                <Navbar.Brand>React-Bootstrap</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link onClick={() => navigate("/home")}>Pagina Principal</Nav.Link>

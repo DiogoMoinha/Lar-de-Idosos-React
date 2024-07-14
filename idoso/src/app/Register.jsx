@@ -33,23 +33,8 @@ export default function CreateUser() {
         });
     }
 
-    function registarAP(nome, email, password, numTel) {
-         fetch('https://laramanha.azurewebsites.net/api/values/Registar', {
-            method: 'POST',
-            headers: {
-                'accept': '*/*',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'Nome': nome,
-                'Email': email,
-                'Password': password,
-                'NumTelemovel': numTel
-            })
-        })
-    }
-
     return <>
+        <h4>Página de Registar</h4>
         <div className="mb-4 mt-5 login-inputs ">
             <label className="form-label" >Nome: </label>
             <div className="ms-3 col-md-4 col-xs-6">
@@ -79,7 +64,7 @@ export default function CreateUser() {
         </div>
 
         <button onClick={()=>{
-                registarAP(nome, email, password, numTel);
+                registar();
             }} type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-4">Registar</button>
 
     </>;

@@ -9,6 +9,7 @@ import ListaTrabalhadores from './app/ListaTrabalhadores';
 import NavbarCust from './app/Navbar';
 import FilterHoc from './app/service/FilterHoc';
 import Idoso from './app/Idoso';
+import Trabalhador from './app/Trabalhador';
 
 const contextInterface = {
   context: { themeIsLight: false, userId: 1 },
@@ -38,6 +39,7 @@ function App() {
                 <Route path="/Idosos" element={<ListaIdoso />} />
                 <Route path="/Idosos/:id" element={<Idoso />} />
                 <Route path='/Trabalhadores' element={<ListaTrabalhadores />} />
+                <Route path="/Trabalhadores/:id" element={<Trabalhador />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/registar" element={<CreateUser />} />
               </Routes>

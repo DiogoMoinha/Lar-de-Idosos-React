@@ -2,7 +2,8 @@
 export function loginAPI(email, pass) {
     return fetch("https://laramanha.azurewebsites.net/api/values/Login", {
         headers: {
-            Accept: "*/*"
+            'accept': '*/*',
+            'Content-Type': 'application/json'
         },
         method: "POST",
         body: JSON.stringify({
@@ -56,8 +57,8 @@ export function createIdosoAPI(Idoso, token) {
     return fetch("https://laramanha.azurewebsites.net/api/values/CreateIdoso", {
         body: JSON.stringify(Idoso),
         headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
+            'accept': '*/*',
+            'Content-Type': 'application/json',
             Authorization: "Bearer "+token
         },
         method: "POST"
@@ -68,8 +69,8 @@ export function createTrabalhadorAPI(Trabalhador, token) {
     return fetch("https://laramanha.azurewebsites.net/api/values/RegistarTrab", {
         body: JSON.stringify(Trabalhador),
         headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
+            'accept': '*/*',
+            'Content-Type': 'application/json',
             Authorization: "Bearer "+token
         },
         method: "POST"
@@ -79,7 +80,8 @@ export function createTrabalhadorAPI(Trabalhador, token) {
 export function deleteIdosoAPI(id, token) {
     return fetch("https://laramanha.azurewebsites.net/api/values/ListaIdoso?idIdoso=" + id, {
         headers: {
-            Accept: "*/*",
+           'accept': '*/*',
+            'Content-Type': 'application/json'
         },
         method: "DELETE"
     })
@@ -88,7 +90,8 @@ export function deleteIdosoAPI(id, token) {
 export function deleteTrabalhadorAPI(id, token) {
     return fetch("https://laramanha.azurewebsites.net/api/values/ListaTrabalhador?idTrabalhador=" + id, {
         headers: {
-            Accept: "*/*",
+            'accept': '*/*',
+            'Content-Type': 'application/json',
             Authorization: "Bearer "+token,
         },
         method: "DELETE"
@@ -99,8 +102,8 @@ export function editIdosoAPI(idosoAEditar, token) {
     return fetch("https://laramanha.azurewebsites.net/api/values/ListaIdoso?Idosoid=" + idosoAEditar.id, {
         body: JSON.stringify(idosoAEditar),
         headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
+            'accept': '*/*',
+            'Content-Type': 'application/json',
             //Authorization: "Bearer "+token
         },
         method: "PUT"
@@ -111,8 +114,8 @@ export function editTrabalhadorAPI(trabalhadorAEditar, token) {
     return fetch("https://laramanha.azurewebsites.net/api/values/updateTrabalhador?trabalhadorId=" + trabalhadorAEditar.id, {
         body: JSON.stringify(trabalhadorAEditar),
         headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
+           'accept': '*/*',
+            'Content-Type': 'application/json',
             Authorization: "Bearer "+token
         },
         method: "PUT"

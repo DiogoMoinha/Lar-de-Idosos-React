@@ -20,17 +20,12 @@ export default function Login() {
         loginAPI(user.email, user.pass)
         .then(res => res.json())
         .then(res => {
-            if(res.success && res.rows[0] != null){
-                let aux = { ...ctx.context };
-                aux.jwtToken = res.rows[0].jwtToken;
-                aux.userId = res.rows[0].userId;
-
-                ctx.setContext(aux);
+            
                 navigate("/home");
                 handleUserId();
-            } else {
-                alert(res.message ?? "Algo correu mal");
-            }
+            //} else {
+               // alert(res.message ?? "Algo correu mal");
+            //}
         })
         .catch(error => {
             console.error('Error during login:', error);
@@ -40,9 +35,9 @@ export default function Login() {
 
     return (
         <div style={{ height: '80vh' }}>
-            <h4>Página de Login</h4>
+            <h4>Página de autenticação</h4>
             <div className="mb-4 mt-5 login-inputs ">
-                <label className="form-label" htmlFor="form2Example1">Email</label>
+                <label className="form-label" htmlFor="form2Example1">Email:</label>
                 <div className="ms-3 col-md-4 col-xs-6">
                     <input 
                         value={user.email} 
@@ -55,7 +50,7 @@ export default function Login() {
             </div>
 
             <div className="mb-4 mt-5 login-inputs ">
-                <label className="form-label" htmlFor="form2Example1">Pass</label>
+                <label className="form-label" htmlFor="form2Example1">Palavra-passe:</label>
                 <div className="ms-3 col-md-4 col-xs-6">
                     <input 
                         value={user.pass} 

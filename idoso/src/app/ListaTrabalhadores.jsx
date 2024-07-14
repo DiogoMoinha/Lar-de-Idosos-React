@@ -52,7 +52,7 @@ function ListaTrabalhadores() {
 
     return (
         <>
-            <button onClick={handleShowCreateTrabalhador}>Adicionar Idoso</button>
+            <button onClick={handleShowCreateTrabalhador}>Adicionar Trabalhador</button>
             <CreateTrabalhador show={showCreateTrabalhador} handleClose={handleCloseCreateTrabalhador} />
 
             <ul className="mt-5" style={{ overflowY: "scroll", height: "60vh" }}>
